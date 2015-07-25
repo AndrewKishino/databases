@@ -19,10 +19,9 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `chat`.`roomnames` (
   `id` INT NOT NULL AUTO_INCREMENT COMMENT '',
-  `roomname` VARCHAR(45) NOT NULL COMMENT '',
+  `roomname` VARCHAR(45) NULL DEFAULT 'lobby' COMMENT '',
   PRIMARY KEY (`id`)  COMMENT '')
 ENGINE = InnoDB;
-
 
 -- -----------------------------------------------------
 -- Table `chat`.`messages`

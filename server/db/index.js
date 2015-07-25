@@ -17,6 +17,4 @@ dbConnection.connect(function(err){
 	}
 });
 
-// dbConnection.queryCb 
-
 module.exports = dbConnection;
