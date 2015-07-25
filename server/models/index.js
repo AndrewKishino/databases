@@ -13,9 +13,9 @@ module.exports = {
   messages: {
     get: function(callback) {
       // connect to database
-      dbConnection.connect();
+      db.dbConnection.connect();
       // query the database to get all messages
-      dbConnection.query("SELECT * from messages", function(err, rows, fields){
+      db.dbConnection.query("SELECT * from messages", function(err, rows, fields){
         dbConnection.end();
         if(err){
           console.log('this is an error');
@@ -26,12 +26,14 @@ module.exports = {
 
 
     post: function (message, callback) {
-      dbConnection.connect();
+      // dbConnection.connect();
       dbConnection.query("INSERT into messages (usernames_id, roomnames_id, messagescol) \
         SELECT r.id, u.id, '" + message.message + "' \
         FROM usernames u, roomnames r \
         WHERE r.roomname='" + message.roomname + "' \
         AND u.username='" + message.username + "'");
+
+      // return db.query(message);
          
     } // a function which can be used to insert a message into the database
   
@@ -40,15 +42,20 @@ module.exports = {
   users: {
     // Ditto as above.
     get: function(callback) {
-      dbConnection.connect();
-      dbConnection.query('SELECT * from messages', function(err, rows, fields){
-        dbConnection.end();
+      // dbConnection.connect();
+      db.dbConnection.query("SELECT * from messages", function(err, rows, fields){
+        db.dbConnection.end();
         if(err){
           console.log("this is an error");
         }
       });  
     },
+    
     post: function (username, cb) {
+      var query = "INSERT into usernames (username) \
+        VALUES '" + username + "'";
+
+      console.log (db.query);
 
     }
   }
