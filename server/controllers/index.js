@@ -11,6 +11,7 @@ module.exports = {
       // I got a GET request for messages so lets go get those messages
       models.messages.get(function(results) { //promisessss
         // send a response back to the client
+        utils.sendResponse(results);
           // the messages (which are the results) need to be passed along
       })
 
@@ -25,12 +26,8 @@ module.exports = {
 
     }, // a function which handles a get request for all messages
     post: function (req, res) {
-      // model needs to execute fcn after data is written 
-      utils.collectData(req, function(message){
-        message.objectId = ++objectId;
-        models.messages.post(message);
-        utils.sendResponse(res, {objectId: objectId}, 201);
-      }); 
+      
+
     }, // a function which handles posting a message to the database
 
     options: {}
@@ -47,7 +44,7 @@ module.exports = {
     post: function (req, res) {
       // console.log('post req.body', req.body);
       // utils.collectData(req.body, function(username){
-        console.log("username", username);
+        // console.log("username", username);
         // username.objectId = ++objectId;
         models.usernames.post(req.body, res);
     },
